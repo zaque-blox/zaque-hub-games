@@ -1,0 +1,40 @@
+-- Carregar a Biblioteca Fluent
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+-- Criar a Janela Principal
+local Window = Fluent:CreateWindow({
+    Title = "Fluent " .. Fluent.Version,
+    TabWidth = 160, 
+    Size = UDim2.fromOffset(580, 460),
+    Theme = "Dark"
+})
+
+-- Criar as Abas
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main" }), -- Aba "Main" criada
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+-- Adicionar Parágrafo na Aba "Main"
+Tabs.Main:AddParagraph({ Title = "Auto", Content = "Sessão Auto" })
+
+-- Adicionar o botão "Auto Punch" com Switch
+local AutoPunchSwitch = Tabs.Main:AddSwitch({
+    Title = "Auto Punch",
+    Default = false, -- Estado inicial (false = desligado)
+    Callback = function(state)
+        if state then
+            print("Auto Punch ativado")  -- Aqui você pode adicionar a funcionalidade de Auto Punch
+        else
+            print("Auto Punch desativado")  -- Aqui você pode parar o Auto Punch
+        end
+    end
+})
+
+-- Gerenciadores de Add-ons
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+-- Finalizar
+Window:SelectTab(1)
+Fluent:Notify({ Title = "Fluent", Content = "The script has been loaded." })

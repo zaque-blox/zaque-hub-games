@@ -1,0 +1,16 @@
+if game.PlaceId == 8737899170 then
+
+    --Load
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+    --Main
+    local Window = OrionLib:MakeWindow({Name = "zaque hub", HidePremium = false, SaveConfig = true, ConfigFolder = "zaqueCfg", IntroEnabled = false})
+
+    --jogador
+    local jogadorTab = Window:MakeTab({
+	Name = "jogador",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+end

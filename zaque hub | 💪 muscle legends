@@ -198,3 +198,20 @@ Tab:AddDropdown({
         end
     end    
 })
+
+-- Criando a Aba "script"
+local Tab = Window:MakeTab({
+    Name = "script",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Seção de script 
+local Section = Tab:AddSection({ Name = "universal" })
+
+Tab:AddButton({
+    Name = "Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+  end    
+})

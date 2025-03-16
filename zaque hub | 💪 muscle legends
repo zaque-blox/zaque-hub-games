@@ -1,0 +1,200 @@
+local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/WRUyYTdY')))()
+
+-- Criando a Janela Principal
+local Window = OrionLib:MakeWindow({
+    Name = "zaque hub",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "zaque hub | 💪 muscle legends"
+})
+
+-- Criando a Aba "Info"
+local Tab = Window:MakeTab({
+    Name = "Info",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Seção de Informações
+local Section = Tab:AddSection({ Name = "Info" })
+local playerName = game.Players.LocalPlayer.Name
+Tab:AddLabel("Ola " .. playerName .. "! obrigado por usar o zaque hub")
+Tab:AddLabel("Bem aqui estão as informações")
+
+-- Seção Sobre o Criador
+local Section = Tab:AddSection({ Name = "Sobre o Criador" })
+Tab:AddLabel("Feito por { zaque_blox } ou { zaquel }")
+Tab:AddLabel("Eu tenho 11 anos")
+
+-- Seção do Jogo
+local Section = Tab:AddSection({ Name = "Game" })
+Tab:AddLabel("💪 Muscle Legends")
+
+-- Seção das Redes Sociais
+local Section = Tab:AddSection({ Name = "Sociais" })
+
+Tab:AddButton({
+    Name = "Discord oficial",
+    Callback = function()
+        setclipboard("https://discord.gg/")
+    end    
+})
+
+Tab:AddButton({
+    Name = "Grupo do Zap Oficial",
+    Callback = function()
+        setclipboard("https://chat.whatsapp.com/CpJRk0pToQsKx94iKIm2a7")
+    end    
+})
+
+Tab:AddButton({
+    Name = "Tiktok Oficial",
+    Callback = function()
+        setclipboard("https://")
+    end    
+})
+
+-- Criando a Aba "Main"
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Seção de Farm
+local Section = Tab:AddSection({ Name = "Farm" })
+
+local autoPunch = false
+local autoTrain = false
+local speedEnabled = false
+local walkSpeed = 16 -- Velocidade padrão
+local jumpEnabled = false
+local jumpPower = 50 -- Jump Power padrão
+
+-- Auto Punch (Usa a ferramenta de soco automaticamente)
+Tab:AddToggle({
+    Name = "Auto Punch",
+    Default = false,
+    Callback = function(Value)
+        autoPunch = Value
+        while autoPunch do
+            local character = game.Players.LocalPlayer.Character
+            if character and character:FindFirstChildOfClass("Tool") then
+                character:FindFirstChildOfClass("Tool"):Activate()
+            end
+            wait(0.3) -- Tempo entre os socos
+        end
+    end    
+})
+
+-- Função para encontrar e equipar o halter (item de treino)
+local function equipHalter()
+    local character = game.Players.LocalPlayer.Character
+    local backpack = game.Players.LocalPlayer.Backpack
+
+    -- Se já estiver segurando um, retorna ele
+    for _, tool in pairs(character:GetChildren()) do
+        if tool:IsA("Tool") then
+            return tool
+        end
+    end
+
+    -- Se não, procura no inventário e equipa
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = character
+            return tool
+        end
+    end
+
+    return nil -- Nenhum halter encontrado
+end
+
+-- Auto Train (Usa halteres automaticamente)
+Tab:AddToggle({
+    Name = "Auto Train",
+    Default = false,
+    Callback = function(Value)
+        autoTrain = Value
+        while autoTrain do
+            local character = game.Players.LocalPlayer.Character
+            if character then
+                local tool = equipHalter()
+                if tool then
+                    tool:Activate()
+                end
+            end
+            wait(0.5) -- Tempo entre cada treino
+        end
+    end    
+})
+
+-- Seção de Player
+local Section = Tab:AddSection({ Name = "Player" })
+
+-- Ativar/Desativar Speed
+Tab:AddToggle({
+    Name = "Speed",
+    Default = false,
+    Callback = function(Value)
+        speedEnabled = Value
+        if speedEnabled then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+        else
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16 -- Velocidade normal
+        end
+    end    
+})
+
+-- Criando opções de velocidade (1 até 500)
+local speedOptions = {}
+for i = 1, 500 do
+    table.insert(speedOptions, tostring(i))
+end
+
+-- Ajustar velocidade do jogador
+Tab:AddDropdown({
+    Name = "Set Speed",
+    Default = "16",
+    Options = speedOptions,
+    Callback = function(Value)
+        if speedEnabled then
+            walkSpeed = tonumber(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+        end
+    end    
+})
+
+-- Ativar/Desativar Jump Power
+Tab:AddToggle({
+    Name = "Jump Power",
+    Default = false,
+    Callback = function(Value)
+        jumpEnabled = Value
+        if jumpEnabled then
+            game.Players.LocalPlayer.Character.Humanoid.UseJumpPower = true
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumpPower
+        else
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50 -- Jump Power padrão
+        end
+    end    
+})
+
+-- Criando opções de Jump Power (50 até 500)
+local jumpOptions = {}
+for i = 50, 500, 10 do -- Aumentando de 10 em 10 para facilitar a escolha
+    table.insert(jumpOptions, tostring(i))
+end
+
+-- Ajustar Jump Power do jogador
+Tab:AddDropdown({
+    Name = "Set Jump Power",
+    Default = "50",
+    Options = jumpOptions,
+    Callback = function(Value)
+        if jumpEnabled then
+            jumpPower = tonumber(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumpPower
+        end
+    end    
+})

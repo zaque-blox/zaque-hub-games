@@ -1,1 +1,3 @@
-nada ainda estou sem executor
+local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/WRUyYTdY')))()
+
+local Window = OrionLib:MakeWindow({Name = "zaque hub", HidePremium = false, SaveConfig = true, ConfigFolder = "zaque hub | blue lock: rivals" IntroEnabled = false})

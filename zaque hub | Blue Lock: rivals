@@ -9,7 +9,7 @@ local Tab = Window:MakeTab({
 })
 
 local Section = Tab:AddSection({
-	Name = "Section"
+	Name = "Info"
 })
 
 local playerName = game.Players.LocalPlayer.Name
@@ -17,3 +17,22 @@ local playerName = game.Players.LocalPlayer.Name
 Tab:AddLabel("bem vindo(a) ao zaque hub " .. playerName .. "!")
 
 Tab:AddLabel("Ainda esta sem nada o script")
+
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Team"
+})
+
+Tab:AddButton({
+	Name = "Team blue:GK",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+

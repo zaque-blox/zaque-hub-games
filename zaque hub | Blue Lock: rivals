@@ -52,6 +52,19 @@ Tab:AddButton({
 Tab:AddButton({
 	Name = "Team White: GK",
 	Callback = function()
-      		print("button pressed")
+      	print("button pressed")
+
+      	local args = {
+    	    [1] = "Away";
+    	    [2] = "GK";
+		}
+
+		game:GetService("ReplicatedStorage"):WaitForChild("Packages", 9e9)
+			:WaitForChild("Knit", 9e9)
+			:WaitForChild("Services", 9e9)
+			:WaitForChild("TeamService", 9e9)
+			:WaitForChild("RE", 9e9)
+			:WaitForChild("Select", 9e9)
+			:FireServer(unpack(args))
   	end    
 })

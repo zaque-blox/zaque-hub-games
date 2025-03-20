@@ -2,88 +2,38 @@ local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/WRUyYTdY')))
 
 local Window = OrionLib:MakeWindow({Name = "zaque hub", HidePremium = false, SaveConfig = true, ConfigFolder = "zaque hub | blue lock: rivals"})
 
-local Tab = Window:MakeTab({
-	Name = "Info",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+local TabInfo = Window:MakeTab({
+    Name = "Info",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
-local Section = Tab:AddSection({
-	Name = "Info"
-})
-
-local playerName = game.Players.LocalPlayer.Name
-
-Tab:AddLabel("bem vindo(a) ao zaque hub " .. playerName .. "!")
-
-Tab:AddLabel("Ainda esta sem nada o script")
-
-local Tab = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-	Name = "Team"
-})
-
-Tab:AddButton({
-    Name = "Team Blue: GK",
-    Callback = function()
-        -- Define os argumentos para a função FireServer
-        local args = {
-            [1] = "Home";
-            [2] = "GK";
-        }
-
-        -- Dispara o evento remoto no servidor
-        game:GetService("ReplicatedStorage")
-            :WaitForChild("Packages", 9e9)
-            :WaitForChild("Knit", 9e9)
-            :WaitForChild("Services", 9e9)
-            :WaitForChild("TeamService", 9e9)
-            :WaitForChild("RE", 9e9)
-            :WaitForChild("local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/WRUyYTdY')))()
-
-local Window = OrionLib:MakeWindow({Name = "zaque hub", HidePremium = false, SaveConfig = true, ConfigFolder = "zaque hub | blue lock: rivals"})
-
-local Tab = Window:MakeTab({
-	Name = "Info",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-	Name = "Info"
+local SectionInfo = TabInfo:AddSection({
+    Name = "Info"
 })
 
 local playerName = game.Players.LocalPlayer.Name
+TabInfo:AddLabel("bem vindo(a) ao zaque hub " .. playerName .. "!")
+TabInfo:AddLabel("Ainda esta sem nada o script")
 
-Tab:AddLabel("bem vindo(a) ao zaque hub " .. playerName .. "!")
-
-Tab:AddLabel("Ainda esta sem nada o script")
-
-local Tab = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+local TabMain = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
 })
 
-local Section = Tab:AddSection({
-	Name = "Team"
+local SectionTeam = TabMain:AddSection({
+    Name = "Team"
 })
 
-Tab:AddButton({
+TabMain:AddButton({
     Name = "Team Blue: GK",
     Callback = function()
-        -- Define os argumentos para a função FireServer
         local args = {
-            [1] = "Home";
-            [2] = "GK";
+            [1] = "Home",
+            [2] = "GK",
         }
 
-        -- Dispara o evento remoto no servidor
         game:GetService("ReplicatedStorage")
             :WaitForChild("Packages", 9e9)
             :WaitForChild("Knit", 9e9)
@@ -93,54 +43,27 @@ Tab:AddButton({
             :WaitForChild("Select", 9e9)
             :FireServer(unpack(args))
 
-        -- Mensagem de depuração
         print("Botão pressionado, código executado")
     end    
 })
 
-Tab:AddButton({
-	Name = "Team White: GK",
-	Callback = function()
-      	print("button pressed")
+TabMain:AddButton({
+    Name = "Team White: GK",
+    Callback = function()
+        print("button pressed")
 
-      	local args = {
-    	    [1] = "Away";
-    	    [2] = "GK";
-		}
+        local args = {
+            [1] = "Away",
+            [2] = "GK",
+        }
 
-		game:GetService("ReplicatedStorage"):WaitForChild("Packages", 9e9)
-			:WaitForChild("Knit", 9e9)
-			:WaitForChild("Services", 9e9)
-			:WaitForChild("TeamService", 9e9)
-			:WaitForChild("RE", 9e9)
-			:WaitForChild("Select", 9e9)
-			:FireServer(unpack(args))
-  	end    
-})
-Select", 9e9)
+        game:GetService("ReplicatedStorage")
+            :WaitForChild("Packages", 9e9)
+            :WaitForChild("Knit", 9e9)
+            :WaitForChild("Services", 9e9)
+            :WaitForChild("TeamService", 9e9)
+            :WaitForChild("RE", 9e9)
+            :WaitForChild("Select", 9e9)
             :FireServer(unpack(args))
-
-        -- Mensagem de depuração
-        print("Botão pressionado, código executado")
     end    
-})
-
-Tab:AddButton({
-	Name = "Team White: GK",
-	Callback = function()
-      	print("button pressed")
-
-      	local args = {
-    	    [1] = "Away";
-    	    [2] = "GK";
-		}
-
-		game:GetService("ReplicatedStorage"):WaitForChild("Packages", 9e9)
-			:WaitForChild("Knit", 9e9)
-			:WaitForChild("Services", 9e9)
-			:WaitForChild("TeamService", 9e9)
-			:WaitForChild("RE", 9e9)
-			:WaitForChild("Select", 9e9)
-			:FireServer(unpack(args))
-  	end    
 })

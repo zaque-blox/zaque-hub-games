@@ -29,10 +29,22 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
-	Name = "Team blue:GK",
+	Name = "Team Blue: GK",
 	Callback = function()
-      		print("button pressed")
-  	end    
+		local args = {
+			[1] = "Blue";
+			[2] = "GK";
+		}
+
+		local replicatedStorage = game:GetService("ReplicatedStorage")
+		local teamService = replicatedStorage:WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("TeamService")
+		local remoteEvent = teamService:WaitForChild("RE"):WaitForChild("Select")
+
+		if remoteEvent then
+			remoteEvent:FireServer(unpack(args))
+			print("Solicitação enviada para selecionar Team Blue: GK")
+		else
+			warn("Erro: Evento remoto não encontrado!")
+		end
+	end    
 })
-
-

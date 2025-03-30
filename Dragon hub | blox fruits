@@ -189,7 +189,6 @@ function CheckQuest()
             LevelQuest = 2
             NameQuest = "SkyExp2Quest"
             NameMon = "Royal Soldier"
-            CFrameQuest =
             CFrameQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
             CFrameMon = CFrame.new(-7836.75341796875, 5645.6640625, -1790.6236572265625)
         elseif MyLevel == 625 or MyLevel <= 649 then
@@ -374,7 +373,6 @@ function CheckQuest()
             Mon = "Water Fighter"
             LevelQuest = 2
             NameQuest = "ForgottenQuest"
-            NameMon = "Water Fighter"
             NameMon = "Water Fighter"
             CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
             CFrameMon = CFrame.new(-3352.9013671875, 285.01556396484375, -10534.841796875)

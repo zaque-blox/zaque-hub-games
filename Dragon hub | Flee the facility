@@ -1,25 +1,68 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 
 local Window = redzlib:MakeWindow({
-  Title = "Dragon Hub | Flee The Facility",
+  Title = "Dragon Hub | Blox Fruits",
   SubTitle = "by zaque_blox",
-  SaveFolder = "Dragon Hub | Flee The Facility.Lua"
+  SaveFolder = "Dragon Hub | Blox Fruits.Lua"
 })
 
 Window:AddMinimizeButton({
-    Button = { Image = "rbxassetid://71014873973869", BackgroundTransparency = 0 },
+    Button = { Image = "rbxassetid://13194991878", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
--- Aba Info
 local InfoTab = Window:MakeTab({"Info", "Info"})
+local Section = InfoTab:AddSection({"Convite"})
+InfoTab:AddDiscordInvite({
+    Name = "Dragon hub",
+    Description = "Join server",
+    Logo = "rbxassetid://13194991878",
+    Invite = "https://discord.gg/bDKp7qNXJK",
+})
 local Section = InfoTab:AddSection({"Info"})
 
-local playerName =
-game.Players.LocalPlayer.Name
-
-local Paragraph = InfoTab:AddParagraph({"Ola " .. playerName .. " seja bem vindo(a) ao Dragon Hub!", ""})
-
--- Aba Main
 local MainTab = Window:MakeTab({"Main", "Home"})
-local Section = MainTab:AddSection({"Auto"})
+local Section = MainTab:AddSection({"Farm"})
+
+local Toggle = MainTab:AddToggle({
+    Name = "Farm Level",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            -- Quando toggle está ativado
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            
+            -- Procura o NPC no workspace
+            local banditQuestGiver
+            for _, npc in pairs(game.Workspace:GetDescendants()) do
+                if npc.Name == "Bandit Quest Giver" and npc:IsA("Model") then
+                    banditQuestGiver = npc
+                    break
+                end
+            end
+            
+            -- Verifica se encontrou o NPC e teleporta
+            if banditQuestGiver then
+                local npcPosition
+                -- Tenta encontrar o HumanoidRootPart do NPC ou usa a posição primária
+                if banditQuestGiver:FindFirstChild("HumanoidRootPart") then
+                    npcPosition = banditQuestGiver.HumanoidRootPart.Position
+                elseif banditQuestGiver:FindFirstChild("PrimaryPart") then
+                    npcPosition = banditQuestGiver.PrimaryPart.Position
+                else
+                    -- Se não encontrar nenhuma parte específica, usa a posição do modelo
+                    npcPosition = banditQuestGiver:GetModelCFrame().p
+                end
+                
+                -- Teleporta o jogador para a posição do NPC
+                humanoidRootPart.CFrame = CFrame.new(npcPosition + Vector3.new(0, 5, 0)) -- 5 unidades acima para evitar colisão
+            else
+                warn("Bandit Quest Giver não encontrado no mapa!")
+            end
+        end
+    end
+})
+
+local SettingsTab = Window:MakeTab({"settings", "settings"})

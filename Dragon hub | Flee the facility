@@ -1,2 +1,25 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 
+local Window = redzlib:MakeWindow({
+  Title = "Dragon Hub | Flee The Facility",
+  SubTitle = "by zaque_blox",
+  SaveFolder = "Dragon Hub | Flee The Facility.Lua"
+})
+
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://71014873973869", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(35, 1) 10},
+})
+
+-- Aba Info
+local InfoTab = Window:MakeTab({"Info", "Info"})
+local Section = InfoTab:AddSection({"Info"})
+
+local playerName =
+game.Players.LocalPlayer.Name
+
+local Paragraph = InfoTab:AddParagraph({"Ola " .. playerName .. " seja bem vindo(a) ao Dragon Hub!", ""})
+
+-- Aba Main
+local MainTab = Window:MakeTab({"Main", "Home"})
+local Section = MainTab:AddSection({"Auto"})

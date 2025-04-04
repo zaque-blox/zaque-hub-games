@@ -1,0 +1,90 @@
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
+
+local Window = redzlib:MakeWindow({
+  Title = "Dragon Hub : Blox Fruits",
+  SubTitle = "by zaque_blox",
+  SaveFolder = "Dragon_Hub_Blox_Fruits.Lua"
+})
+
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://13194991878", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(35, 1) },
+})
+
+local InfoTab = Window:MakeTab({"Info", "Info"})
+local Section = InfoTab:AddSection({"Convite"})
+InfoTab:AddDiscordInvite({
+    Name = "Dragon hub",
+    Description = "Join server",
+    Logo = "rbxassetid://13194991878",
+    Invite = "https://discord.gg/bDKp7qNXJK",
+})
+local Section = InfoTab:AddSection({"Info"})
+
+local MainTab = Window:MakeTab({"Main", "Home"})
+local Section = MainTab:AddSection({"Farm"})
+
+-- Posição do Quest Giver para JungleQuest
+local jungleQuestPosition = Vector3.new(-1602.02, 36.89, 153.11)
+
+-- Toggle para ativar/desativar o Farm Level
+local Toggle = MainTab:AddToggle({
+    Name = "Farm Level",
+    Default = false
+})
+
+-- Função para obter o nível do jogador
+function GetPlayerLevel()
+    return game:GetService("Players").LocalPlayer.Data.Level.Value
+end
+
+-- Função para mover o jogador local e a câmera para o NPC
+function MoveLocalPlayerToQuestGiver(position)
+    local player = game:GetService("Players").LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait() -- Obtém o personagem do jogador
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart") -- Parte principal do personagem
+    
+    -- Teleporta o personagem para a posição do NPC
+    humanoidRootPart.CFrame = CFrame.new(position) -- Teleporta o HumanoidRootPart para a posição do NPC
+    
+    -- Mover a câmera para olhar na direção do NPC
+    local camera = game:GetService("Workspace").CurrentCamera
+    camera.CFrame = CFrame.new(position + Vector3.new(0, 5, -10), position) -- Ajusta a altura e a distância
+end
+
+-- Função para checar o nível do jogador e mover para o NPC
+function CheckPlayerLevel()
+    if not Toggle:GetValue() then
+        return -- Sai da função se o toggle estiver desativado
+    end
+
+    local MyLevel = GetPlayerLevel() -- Obtém o nível do jogador
+    local Mon, LevelQuest, NameQuest, NameMon
+
+    -- Verifica os níveis e define as variáveis
+    if MyLevel >= 0 and MyLevel <= 9 then
+        Mon = "Bandit"
+        LevelQuest = 0
+        NameQuest = "BanditQuest"
+        NameMon = "Bandit"
+        MoveLocalPlayerToQuestGiver(Vector3.new(1059.91, 16.40, 1550.07)) -- Posição do Bandit Quest Giver
+    elseif MyLevel >= 10 and MyLevel <= 14 then
+        Mon = "Monkey"
+        LevelQuest = 1
+        NameQuest = "JungleQuest"
+        NameMon = "Monkey"
+        MoveLocalPlayerToQuestGiver(jungleQuestPosition) -- Posição do Jungle Quest Giver
+    else
+        print("Seu nível não é adequado para as quests disponíveis.")
+        return
+    end
+
+    print("Você foi movido para o " .. NameQuest .. " e sua missão é derrotar " .. Mon .. "!")
+end
+
+-- Chama a função para checar o nível do jogador
+CheckPlayerLevel()
+
+-- Adicione um loop ou evento para chamar CheckPlayerLevel periodicamente se necessário
+
+local SettingsTab = Window:MakeTab({"settings", "settings"})
